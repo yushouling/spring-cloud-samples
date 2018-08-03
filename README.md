@@ -13,11 +13,11 @@ Spring cloud samples with Eureka, Hystrix, Ribbon and so on.
 4.启动microservice-hystrix-dashboard
 
 
-eureka注册中心：
+Eureka Console：
 
 http://localhost:8761/
 
-发起请求：
+发起请求测试：
 
 http://localhost:8010/movie/1
 
