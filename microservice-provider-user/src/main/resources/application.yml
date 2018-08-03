@@ -1,0 +1,35 @@
+server:
+  port: 7901
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  application:
+    name: microservice-provider-user
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.ysl: DEBUG
+eureka:
+  client:
+    healthcheck:
+      enabled: false
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka,http://user:password123@localhost:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    metadata-map:
+      zone: ABC      # eureka可以理解的元数据
+      lilizhou: BBC  # 不会影响客户端行为
+    #注册服务慢的问题，默认心跳30秒，在生产中，最好坚持使用默认值
+    lease-renewal-interval-in-seconds: 5
